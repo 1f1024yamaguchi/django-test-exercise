@@ -41,12 +41,12 @@ class TaskModelTestCase(TestCase):
     def test_is_overdue_past(self):
         due = timezone.make_aware(datetime(2024, 6, 30, 23, 59, 59))
         current = timezone.make_aware(datetime(2024, 7, 1, 0, 0, 0))
-        task = Task(title='task2',due_at=due)
+        task = Task(title='task2', due_at=due)
         task.save()
 
         self.assertTrue(task.is_overdue(current))
 
-    def test_is_overdue_none(self):    
+    def test_is_overdue_none(self):
         current = timezone.make_aware(datetime(2024, 7, 1, 0, 0, 0))
         task = Task(title='task3')
         task.save()
@@ -96,4 +96,4 @@ class TodoViewTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.templates[0].name, 'todo/index.html')
         self.assertEqual(response.context['tasks'][0], task2)
-        self.assertEqual(response.context['tasks'][1], task1) 
+        self.assertEqual(response.context['tasks'][1], task1)
